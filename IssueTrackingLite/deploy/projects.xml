@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>Tracking service projects' names</comment>
+	<entry key="Project1">Project1</entry>
+	<entry key="Project2">Project2</entry>
+	<entry key="Project3">Project3</entry>
+	<entry key="Project4">Project4</entry>
+</properties>

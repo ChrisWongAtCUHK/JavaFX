@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="IssueTrackingLite">
+	<property name="base-dir" value="bin"/>
+	<property name="resource-dir" value="res"/>
+	<property name="project-name" value="IssueTrackingLite"/>
+	<property name="fxml-name" value="IssueTrackingLiteComplete.fxml"/>
+	<property name="fxml-class" value="issuetrackinglite/Main"/>
+	<property name="created-by" value="Chris Wong"/>
+	<property name="main-class" value="${fxml-class}"/>
+	<!-- TODO: note that it is absolute path -->
+	<property name="jfxrt.jar"  value="C:\Program Files\Java\jdk1.7.0_25\jre\lib\jfxrt.jar"/>
+	
+	<!-- prepare  -->
+	<target name="prepare">
+		<mkdir dir="deploy" />
+		<mkdir dir="${base-dir}/${resource-dir}" />
+		<copy todir="${base-dir}/${resource-dir}">
+			<fileset dir="${resource-dir}" includes="*/**.*" />
+		</copy>
+		<copy todir="deploy">
+			<fileset dir="." includes="*.xml" excludes="build.xml"/>
+		</copy>
+	</target>
+		
+	<!-- create the jar -->
+	<target name="build" depends="prepare">
+		<jar jarfile="deploy/${project-name}.jar" basedir="${base-dir}">
+			<manifest>
+				<attribute name="Manifest-Version" value="1.0" />
+				<attribute name="JavaFX-Version" value="2.2" />
+				<attribute name="implementation-title" value="${project-name}" />
+				<attribute name="implementation-version" value="1.0" />
+				<attribute name="JavaFX-Application-Class" value="${fxml-class}" />
+				<attribute name="Created-By" value="Chris Wong" />
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+			<zipfileset src="${jfxrt.jar}" /> 
+		</jar>
+	</target>
+</project>

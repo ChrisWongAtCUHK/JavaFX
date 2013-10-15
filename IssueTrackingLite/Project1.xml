@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>Project 1</comment>
+	<entry key="synopsis1">We rode in sorrow, with strong hounds three</entry>
+	<entry key="description1">From "The Wanderings Of Oisin".
+W. B. Yeats.
+	</entry>
+    <entry key="synopsis2">Bran, Sgeolan, and Lomair</entry>
+    <entry key="description2">From "The Wanderings Of Oisin".
+W. B. Yeats.
+    </entry>
+    <entry key="synopsis3">For our best were dead on Gavra's green</entry>
+    <entry key="description3">From "The Wanderings Of Oisin".
+W. B. Yeats.
+    </entry>
+</properties>

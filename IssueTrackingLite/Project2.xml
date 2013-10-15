@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>Project 2</comment>
+	<entry key="synopsis1">On a morning misty and mild and fair</entry>
+	<entry key="description1">From "The Wanderings Of Oisin".
+W. B. Yeats.
+	</entry>
+    <entry key="synopsis2">We rode in sadness above Lough Lean</entry>
+    <entry key="description2">From "The Wanderings Of Oisin"
+W. B. Yeats.
+    </entry>
+</properties>
