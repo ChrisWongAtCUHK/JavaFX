@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="FXMLExample">
+	<property name="base-dir" value="bin"/>
+	<property name="project-name" value="FXMLExample"/>
+	<property name="fxml-name" value="fxml_example.fxml"/>
+	<property name="fxml-js" value="fxml_example.js"/>
+	<property name="fxml-class" value="fxmlexample/FXMLExample"/>
+	<property name="created-by" value="Chris Wong"/>
+	<property name="class-path" value="jar/jfxrt.jar"/>
+	<property name="main-class" value="${fxml-class}"/>
+	<!-- TODO: note that it is absolute path -->
+	<property name="jfxrt.jar"  value="C:\Program Files\Java\jdk1.7.0_25\jre\lib\jfxrt.jar"/>
+	
+	<!-- prepare  -->
+	<target name="prepare">
+		<mkdir dir="deploy" />
+		<copy file="${fxml-name}" todir="${base-dir}" />
+		<copy file="${fxml-js}" todir="${base-dir}" />
+	</target>
+		
+	<!-- create the jar -->
+	<target name="build" depends="prepare">
+		<jar jarfile="deploy/${project-name}.jar" basedir="${base-dir}">
+			<manifest>
+				<attribute name="Manifest-Version" value="1.0" />
+				<attribute name="JavaFX-Version" value="2.2" />
+				<attribute name="implementation-title" value="${project-name}" />
+				<attribute name="implementation-version" value="1.0" />
+				<attribute name="JavaFX-Application-Class" value="${fxml-class}" />
+				<attribute name="Created-By" value="Chris Wong" />
+				<attribute name="Class-Path" value="${class-path}" />
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+			<zipfileset src="${jfxrt.jar}" /> 
+		</jar>
+	</target>
+</project>
