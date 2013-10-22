@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project basedir="." default="build" name="FXMLExample">
-	<property environment="env"/>
 	<property name="base-dir" value="bin"/>
 	<property name="project-name" value="FXMLExample"/>
 	<property name="fxml-name" value="fxml_example.fxml"/>
+	<property name="fxml-js" value="fxml_example.js"/>
 	<property name="fxml-class" value="fxmlexample/FXMLExample"/>
 	<property name="created-by" value="Chris Wong"/>
+	<property name="class-path" value="jar/jfxrt.jar"/>
 	<property name="main-class" value="${fxml-class}"/>
 	<!-- TODO: note that it is absolute path -->
-	<property name="jfxrt.jar"  value="${env.JAVA_HOME}\jre\lib\jfxrt.jar"/>
-	
-	<!-- compile the project -->
-	<target name="compile" description="compile the source files">
-		<javac includeantruntime="false" srcdir="./src" destdir="${base-dir}" classpath="jfxrt.jar" >
-		</javac>
-	</target>
-
-	<!-- run the project -->
-	<target name="run" description="run the project">
-		<java jar="deploy/${project-name}.jar" fork="true"
-           failonerror="true" >
-		</java>
-	</target>
+	<property name="jfxrt.jar"  value="C:\Program Files\Java\jre7\lib\jfxrt.jar"/>
 	
 	<!-- prepare  -->
-	<target name="prepare" depends="compile">
+	<target name="prepare">
+		<mkdir dir="${base-dir}" />
 		<mkdir dir="deploy" />
 		<copy file="${fxml-name}" todir="${base-dir}" />
+		<copy file="${fxml-js}" todir="${base-dir}" />
 	</target>
 		
+	<!-- compile -->
+	<target name="compile">
+		<mkdir dir="prepare" />
+		<javac sourcepath="" srcdir="src"
+         destdir="${base-dir}" classpath="${jfxrt.jar}" >
+			<include name="**/*.java"/>
+		</javac>
+	</target>
+	
 	<!-- create the jar -->
 	<target name="build" depends="prepare">
 		<jar jarfile="deploy/${project-name}.jar" basedir="${base-dir}">
@@ -39,10 +38,30 @@
 				<attribute name="implementation-version" value="1.0" />
 				<attribute name="JavaFX-Application-Class" value="${fxml-class}" />
 				<attribute name="Created-By" value="Chris Wong" />
+				<attribute name="Class-Path" value="${class-path}" />
 				<attribute name="Main-Class" value="${main-class}" />
 			</manifest>
 			<zipfileset src="${jfxrt.jar}" /> 
 		</jar>
-		<echo>build by ${env.JAVA_HOME}</echo>
 	</target>
+	
+	<!-- run the jar -->
+	<target name="run">
+	 <java jar="deploy/${project-name}.jar"
+           fork="true"
+           failonerror="true" >
+		   <classpath>
+			<pathelement location="deploy/${project-name}.jar"/>
+		   </classpath>
+		</java>
+	</target>
+	
+	<!-- clean the built files-->
+	<target name="clean">
+		<delete>
+			<fileset dir="${base-dir}" includes="**/*.class"/>
+			<fileset dir="deploy" includes="**/*.jar"/>
+		</delete>
+	</target>
+	
 </project>
