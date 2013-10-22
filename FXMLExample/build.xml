@@ -9,15 +9,25 @@
 	<property name="class-path" value="jar/jfxrt.jar"/>
 	<property name="main-class" value="${fxml-class}"/>
 	<!-- TODO: note that it is absolute path -->
-	<property name="jfxrt.jar"  value="C:\Program Files\Java\jdk1.7.0_25\jre\lib\jfxrt.jar"/>
+	<property name="jfxrt.jar"  value="C:\Program Files\Java\jre7\lib\jfxrt.jar"/>
 	
 	<!-- prepare  -->
 	<target name="prepare">
+		<mkdir dir="${base-dir}" />
 		<mkdir dir="deploy" />
 		<copy file="${fxml-name}" todir="${base-dir}" />
 		<copy file="${fxml-js}" todir="${base-dir}" />
 	</target>
 		
+	<!-- compile -->
+	<target name="compile">
+		<mkdir dir="prepare" />
+		<javac sourcepath="" srcdir="src"
+         destdir="${base-dir}" classpath="${jfxrt.jar}" >
+			<include name="**/*.java"/>
+		</javac>
+	</target>
+	
 	<!-- create the jar -->
 	<target name="build" depends="prepare">
 		<jar jarfile="deploy/${project-name}.jar" basedir="${base-dir}">
@@ -33,5 +43,15 @@
 			</manifest>
 			<zipfileset src="${jfxrt.jar}" /> 
 		</jar>
+	</target>
+	
+	<target name="run">
+	 <java jar="deploy/${project-name}.jar"
+           fork="true"
+           failonerror="true" >
+		   <classpath>
+			<pathelement location="deploy/${project-name}.jar"/>
+		   </classpath>
+	</java>
 	</target>
 </project>
