@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="ColorfulCircles">
+	<property name="base-dir" value="bin"/>
+	<property name="project-name" value="ColorfulCircles"/>
+	<property name="created-by" value="Chris Wong"/>
+	<property name="class-path" value="jar/jfxrt.jar"/>
+	<property name="main-class" value="colorfulcircles/ColorfulCircles"/>
+	<!-- TODO: note that it is absolute path -->
+	<property name="jfxrt.jar"  value="C:\Program Files\Java\jre7\lib\jfxrt.jar"/>
+	
+	<!-- prepare  -->
+	<target name="prepare">
+		<mkdir dir="${base-dir}" />
+		<mkdir dir="deploy" />
+	</target>
+		
+	<!-- compile -->
+	<target name="compile">
+		<mkdir dir="prepare" />
+		<javac sourcepath="" srcdir="src"
+         destdir="${base-dir}" classpath="${jfxrt.jar}" >
+			<include name="**/*.java"/>
+		</javac>
+	</target>
+	
+	<!-- create the jar -->
+	<target name="build" depends="prepare">
+		<jar jarfile="deploy/${project-name}.jar" basedir="${base-dir}">
+			<manifest>
+				<attribute name="Manifest-Version" value="1.0" />
+				<attribute name="JavaFX-Version" value="2.2" />
+				<attribute name="implementation-title" value="${project-name}" />
+				<attribute name="implementation-version" value="1.0" />
+				<attribute name="JavaFX-Application-Class" value="${main-class}" />
+				<attribute name="Created-By" value="Chris Wong" />
+				<attribute name="Class-Path" value="${class-path}" />
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+			<zipfileset src="${jfxrt.jar}" /> 
+		</jar>
+	</target>
+	
+	<!-- run the jar -->
+	<target name="run">
+	 <java jar="deploy/${project-name}.jar"
+           fork="true"
+           failonerror="true" >
+		   <classpath>
+			<pathelement location="deploy/${project-name}.jar"/>
+		   </classpath>
+		</java>
+	</target>
+	
+	<!-- clean the built files-->
+	<target name="clean">
+		<delete>
+			<fileset dir="${base-dir}" includes="**/*.class"/>
+			<fileset dir="deploy" includes="**/*.jar"/>
+		</delete>
+	</target>
+	
+</project>
