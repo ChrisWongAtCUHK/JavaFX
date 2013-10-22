@@ -45,6 +45,7 @@
 		</jar>
 	</target>
 	
+	<!-- run the jar -->
 	<target name="run">
 	 <java jar="deploy/${project-name}.jar"
            fork="true"
@@ -52,6 +53,15 @@
 		   <classpath>
 			<pathelement location="deploy/${project-name}.jar"/>
 		   </classpath>
-	</java>
+		</java>
 	</target>
+	
+	<!-- clean the built files-->
+	<target name="clean">
+		<delete>
+			<fileset dir="${base-dir}" includes="**/*.class"/>
+			<fileset dir="deploy" includes="**/*.jar"/>
+		</delete>
+	</target>
+	
 </project>
